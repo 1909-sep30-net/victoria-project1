@@ -38,7 +38,7 @@ GO
 CREATE TABLE [Inventory] (
   [InventoryId] int PRIMARY KEY NOT NULL IDENTITY(1, 1),
   [ProductId] int NOT NULL,
-  [Quantity] int
+  [Quantity] int NOT NULL
 )
 GO
 
@@ -59,3 +59,11 @@ GO
 
 ALTER TABLE [Inventory] ADD FOREIGN KEY ([ProductId]) REFERENCES [Products] ([ProductId])
 GO
+
+
+DROP TABLE Inventory
+DROP TABLE OrderDetail
+DROP TABLE Orders
+DROP TABLE Products
+DROP TABLE Stores
+DROP TABLE Customers

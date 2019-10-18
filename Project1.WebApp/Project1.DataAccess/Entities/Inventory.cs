@@ -12,7 +12,7 @@ namespace Project1.DataAccess.Entities
 
         public int InventoryId { get; set; }
         public int ProductId { get; set; }
-        public int? Quantity { get; set; }
+        public int Quantity { get; set; }
 
         public virtual Products Product { get; set; }
         public virtual ICollection<Stores> Stores { get; set; }

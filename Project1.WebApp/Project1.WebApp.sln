@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project1.DataAccess", "Proj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project1.BusinessLogic", "Project1.BusinessLogic\Project1.BusinessLogic.csproj", "{5E4F46CE-D06C-4746-BC18-1C6EF497ACF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project1Testing", "Project1Testing\Project1Testing.csproj", "{A4620273-27E1-4F2C-BFC7-40604413DAA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project1.Testing", "Project1Testing\Project1.Testing.csproj", "{A4620273-27E1-4F2C-BFC7-40604413DAA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

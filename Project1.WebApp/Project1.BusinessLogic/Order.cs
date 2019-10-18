@@ -39,5 +39,7 @@ namespace Project1.BusinessLogic
                 orderTotal = value;
             }
         }
+
+        public int OrderDetailId;
     }
 }
