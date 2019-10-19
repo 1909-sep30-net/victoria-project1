@@ -40,6 +40,5 @@ namespace Project1.BusinessLogic
             }
         }
 
-        public int OrderDetailId;
     }
 }

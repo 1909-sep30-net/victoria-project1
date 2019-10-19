@@ -20,7 +20,7 @@ namespace Project1.BusinessLogic
 
         public int ProductId;
 
-        public int StoreID;
+        public int StoreId;
 
         private int quantity;
 

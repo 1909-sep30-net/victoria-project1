@@ -1,3 +1,11 @@
+DROP TABLE Orders
+DROP TABLE Stores
+DROP TABLE Customers
+DROP TABLE OrderDetail
+DROP TABLE Inventory
+DROP TABLE Products
+
+
 CREATE TABLE [Customers] (
   [CustomerId] int PRIMARY KEY NOT NULL IDENTITY(1, 1),
   [FirstName] nvarchar(100) NOT NULL,
@@ -10,15 +18,16 @@ CREATE TABLE [Orders] (
   [OrderId] int PRIMARY KEY NOT NULL IDENTITY(1, 1),
   [OrderDate] datetime2 NOT NULL DEFAULT GETDATE(),
   [Total] money NOT NULL,
-  [StoreId] int NOT NULL,
-  [OrderDetailId] int NOT NULL
+  [StoreId] int NOT NULL
+
 )
 GO
 
 CREATE TABLE [OrderDetail] (
   [OrderDetailId] int PRIMARY KEY NOT NULL IDENTITY(1, 1),
   [ProductId] int NOT NULL,
-  [ProductQuant] int NOT NULL
+  [ProductQuant] int NOT NULL,
+  [OrderId] int NOT NULL
 )
 GO
 
@@ -31,14 +40,15 @@ GO
 
 CREATE TABLE [Stores] (
   [StoreId] int PRIMARY KEY NOT NULL IDENTITY(101, 1),
-  [InventoryId] int NOT NULL
+  [City] nvarchar(100) NOT NULL
 )
 GO
 
 CREATE TABLE [Inventory] (
   [InventoryId] int PRIMARY KEY NOT NULL IDENTITY(1, 1),
   [ProductId] int NOT NULL,
-  [Quantity] int NOT NULL
+  [Quantity] int NOT NULL,
+  [StoreId] int NOT NULL
 )
 GO
 
@@ -48,22 +58,15 @@ GO
 ALTER TABLE [Orders] ADD FOREIGN KEY ([StoreId]) REFERENCES [Stores] ([StoreId])
 GO
 
-ALTER TABLE [Orders] ADD FOREIGN KEY ([OrderDetailId]) REFERENCES [OrderDetail] ([OrderDetailId])
-GO
-
 ALTER TABLE [OrderDetail] ADD FOREIGN KEY ([ProductId]) REFERENCES [Products] ([ProductId])
-GO
-
-ALTER TABLE [Stores] ADD FOREIGN KEY ([InventoryId]) REFERENCES [Inventory] ([InventoryId])
 GO
 
 ALTER TABLE [Inventory] ADD FOREIGN KEY ([ProductId]) REFERENCES [Products] ([ProductId])
 GO
 
+ALTER TABLE [Inventory] ADD FOREIGN KEY ([StoreId]) REFERENCES [Stores] ([StoreId])
+GO
+ 
+ALTER TABLE [OrderDetail] ADD FOREIGN KEY ([OrderId]) REFERENCES [Orders] ([OrderId])
+GO
 
-DROP TABLE Inventory
-DROP TABLE OrderDetail
-DROP TABLE Orders
-DROP TABLE Products
-DROP TABLE Stores
-DROP TABLE Customers

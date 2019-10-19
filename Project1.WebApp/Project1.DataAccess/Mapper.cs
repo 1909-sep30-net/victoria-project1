@@ -20,9 +20,14 @@ namespace Project1.DataAccess
 
                 StoreId = stores.StoreId,
 
-                inventoryId = stores.InventoryId
+                City = stores.City
 
             };
+        }
+
+        internal static Store MapStore(object p)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -37,7 +42,7 @@ namespace Project1.DataAccess
 
                 StoreId = store.StoreId,
 
-                InventoryId = store.inventoryId
+                City = store.City
             };
 
         }
@@ -131,7 +136,7 @@ namespace Project1.DataAccess
 
                 CustomerId = orders.CustomerId,
 
-                OrderDetailId = orders.OrderDetailId
+               
 
                 //cart = MapCart()? map orderdetailID?
 
@@ -159,7 +164,6 @@ namespace Project1.DataAccess
 
                 CustomerId = order.CustomerId,
 
-                OrderDetailId = order.OrderDetailId
 
 
             };
@@ -175,8 +179,9 @@ namespace Project1.DataAccess
 
                 ProductId = inventory.ProductId,
 
-                Quantity = inventory.Quantity
+                Quantity = inventory.Quantity,
 
+                StoreId = inventory.StoreId
             };
         }
 
@@ -191,7 +196,9 @@ namespace Project1.DataAccess
 
                 ProductId = inventory.ProductId,
 
-                Quantity = inventory.Quantity
+                Quantity = inventory.Quantity,
+
+                StoreId = inventory.StoreId
 
             };
         }
@@ -217,6 +224,38 @@ namespace Project1.DataAccess
 
 
 
+        }
+
+        //convert BL Od to DB od
+        public static Project1.DataAccess.Entities.OrderDetail MapDbOrderDetail(BusinessLogic.OrderDetails orderDetails)
+        {
+            return new Project1.DataAccess.Entities.OrderDetail
+            {
+                OrderDetailId = orderDetails.OrderDetailId,
+
+                ProductId = orderDetails.ProductId,
+
+                ProductQuant = orderDetails.ProductQuant,
+
+                OrderId = orderDetails.OrderId
+
+            };
+        }
+
+        //convert DB Od to BL Od
+        public static Project1.BusinessLogic.OrderDetails MapOrderDetail(Project1.DataAccess.Entities.OrderDetail orderDetail)
+        {
+            return new Project1.BusinessLogic.OrderDetails
+            {
+                OrderDetailId = orderDetail.OrderDetailId,
+
+                ProductId = orderDetail.ProductId,
+
+                ProductQuant = orderDetail.ProductQuant,
+
+                OrderId = orderDetail.OrderId
+
+            };
         }
 
     }

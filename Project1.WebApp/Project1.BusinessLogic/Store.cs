@@ -18,8 +18,19 @@ namespace Project1.BusinessLogic
             }
         }
 
+        private string city;
 
-        public int inventoryId;
+        public string City
+        {
+            get => city;
+            set
+            {
+                if (value == string.Empty)
+                    throw new ArgumentException("Store must have a city", nameof(value));
+
+                city = value;
+            }
+        }
         
     }
 }
