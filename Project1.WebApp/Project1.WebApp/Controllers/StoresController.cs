@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project1.DataAccess.Interfaces;
+using Project1.WebApp.Models;
 
 namespace Project1.WebApp.Controllers
 {
@@ -21,8 +22,14 @@ namespace Project1.WebApp.Controllers
         public ActionResult Stores()
         {
             IEnumerable<BusinessLogic.Store> store = _repository.GetAllStores();
-            
-            return View(store);
+
+            var viewModel = store.Select(s => new StoreViewModel
+            {
+                StoreId = s.StoreId,
+                City = s.City
+            });
+
+            return View(viewModel);
         }
 
         // GET: Stores/Details/5
