@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Project1.BusinessLogic;
 using Project1.DataAccess.Entities;
+using Project1.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Project1.DataAccess.Repos
 {
-    public class OrderRepo
+    public class OrderRepo : IOrderRepo
     {
         private ClothesEncountersContext context;
 
@@ -34,5 +36,9 @@ namespace Project1.DataAccess.Repos
             context.SaveChanges();
         }
 
+        public void AddNewOrder()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

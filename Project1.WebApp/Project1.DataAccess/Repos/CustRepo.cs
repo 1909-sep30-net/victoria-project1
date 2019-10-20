@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Project1.DataAccess.Repos
 {
-    public class CustRepo
+    public class CustRepo : ICustRepo
     {
         private ClothesEncountersContext context;
 
@@ -50,7 +50,14 @@ namespace Project1.DataAccess.Repos
             context.SaveChanges();
         }
 
+        public void AddNewCustomer()
+        {
+            throw new NotImplementedException();
+        }
 
-
+        public Customer GetCustomerByFirstName()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

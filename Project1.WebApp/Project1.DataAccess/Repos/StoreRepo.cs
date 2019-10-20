@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project1.BusinessLogic;
 using Project1.DataAccess.Entities;
+using Project1.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Project1.DataAccess.Repos
 {
-    public class StoreRepo
+    public class StoreRepo : IStoreRepo
     {
         private ClothesEncountersContext context;
 
@@ -51,6 +52,11 @@ namespace Project1.DataAccess.Repos
             }
             return burrito;
 
+        }
+
+        public Store GetStoreById()
+        {
+            throw new NotImplementedException();
         }
     }
 }
