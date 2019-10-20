@@ -37,6 +37,7 @@ namespace Project1.BusinessLogic
 
         }
 
+        public string Name { get => FirstName + " " + LastName; }
 
 
         private int id;

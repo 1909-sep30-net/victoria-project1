@@ -14,6 +14,8 @@ namespace Project1.DataAccess.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public string Name { get => FirstName + " " + LastName; }
+
         public virtual ICollection<Orders> Orders { get; set; }
     }
 }

@@ -39,6 +39,7 @@ namespace Project1.DataAccess.Repos
                 .AsNoTracking();
 
             return customers.Select(Mapper.MapCustomer).ToList();
+        
 
 
         }

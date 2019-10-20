@@ -4,15 +4,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Project1.BusinessLogic;
+using Project1.DataAccess;
+using Project1.DataAccess.Entities;
+using Project1.DataAccess.Repos;
+using Project1.WebApp.Models;
 
 namespace Project1.WebApp.Controllers
 {
     public class CustomersController : Controller
     {
+
+        private readonly DataAccess.ICustRepo _repository;
+
+        public CustomersController(ICustRepo repository)
+        {
+            _repository = repository;
+        }
+
         // GET: Customers
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<Customer> customer = _repository.GetAllCustomers();
+
+            var viewModel = customer.Select(c => new CustomerViewModel
+            {
+                Id = c.Id,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+            });
+
+            return View(viewModel);
         }
 
         // GET: Customers/Details/5
@@ -24,7 +46,9 @@ namespace Project1.WebApp.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            return View();
+            //Customer customer = _repository.AddNewCustomer();
+
+           return View();
         }
 
         // POST: Customers/Create

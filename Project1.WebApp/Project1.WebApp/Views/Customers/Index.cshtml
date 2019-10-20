@@ -4,16 +4,16 @@
 @{
 }
 
-@model IEnumerable<Project1.BusinessLogic.Customer>
+@model IEnumerable<CustomerViewModel>
 
 @{
     ViewData["Title"] = "Customers";
 }
 
-<h1>Index</h1>
+<h1>Our Customers</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Customer</a>
 </p>
 <table class="table">
     <thead>
@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.FirstName)  
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastName)
@@ -43,9 +43,8 @@
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Place Order", "Place Order", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Order History", "Order History", new { /* id=item.PrimaryKey */ }) 
                 </td>
             </tr>
         }

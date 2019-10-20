@@ -4,15 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Project1.DataAccess.Interfaces;
 
 namespace Project1.WebApp.Controllers
 {
     public class StoresController : Controller
     {
-        // GET: Stores
-        public ActionResult Index()
+        private readonly IStoreRepo _repository;
+
+        public StoresController(IStoreRepo repository)
         {
-            return View();
+            _repository = repository;
+        }
+
+        // GET: Stores
+        public ActionResult Stores()
+        {
+            IEnumerable<BusinessLogic.Store> store = _repository.GetAllStores();
+            
+            return View(store);
         }
 
         // GET: Stores/Details/5

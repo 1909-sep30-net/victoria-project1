@@ -5,9 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Project1.DataAccess;
+using Project1.DataAccess.Entities;
+using Project1.DataAccess.Interfaces;
+using Project1.DataAccess.Repos;
 
 namespace Project1.WebApp
 {
@@ -23,6 +28,19 @@ namespace Project1.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = Configuration.GetConnectionString("CeDb");
+
+            services.AddDbContext<ClothesEncountersContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
+
+            services.AddScoped<ICustRepo, CustRepo>();
+
+            services.AddScoped<IStoreRepo, StoreRepo>();
+
+            services.AddScoped<IOrderRepo, OrderRepo>();
+
             services.AddControllersWithViews();
         }
 
