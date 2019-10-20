@@ -15,7 +15,7 @@ namespace Project1.WebApp.Controllers
     public class CustomersController : Controller
     {
 
-        private readonly DataAccess.ICustRepo _repository;
+        private readonly ICustRepo _repository;
 
         public CustomersController(ICustRepo repository)
         {
@@ -25,7 +25,7 @@ namespace Project1.WebApp.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            IEnumerable<Customer> customer = _repository.GetAllCustomers();
+            List<Customer> customer = _repository.GetAllCustomers();
 
             var viewModel = customer.Select(c => new CustomerViewModel
             {
@@ -45,26 +45,31 @@ namespace Project1.WebApp.Controllers
 
         // GET: Customers/Create
         public ActionResult Create()
-        {
-            //Customer customer = _repository.AddNewCustomer();
+        { 
 
-           return View();
+            return View();
         }
 
         // POST: Customers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CustomerViewModel viewModel)
         {
             try
             {
-                // TODO: Add insert logic here
+                var newCust = new BusinessLogic.Customer
+                {
+                    FirstName = viewModel.FirstName,
+                    LastName = viewModel.LastName
+                };
+
+                _repository.AddNewCustomer(newCust);
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch 
             {
-                return View();
+                return View(viewModel);
             }
         }
 
@@ -108,7 +113,7 @@ namespace Project1.WebApp.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch 
             {
                 return View();
             }

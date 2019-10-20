@@ -7,7 +7,7 @@ namespace Project1.DataAccess
 {
     public interface ICustRepo
     {
-        public void AddNewCustomer();
+        public void AddNewCustomer(Customer customer);
 
         public List<BusinessLogic.Customer> GetAllCustomers();
 

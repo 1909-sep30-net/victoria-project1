@@ -33,15 +33,12 @@ namespace Project1.DataAccess.Repos
 
            => context.Customers.Select(Mapper.MapCustomer).Where(c => c.FirstName == firstName).FirstOrDefault();
 
-        public List<BusinessLogic.Customer> GetAllCustomers()
+        public List<Customer> GetAllCustomers()
         {
             IQueryable<Project1.DataAccess.Entities.Customers> customers = context.Customers
                 .AsNoTracking();
 
             return customers.Select(Mapper.MapCustomer).ToList();
-        
-
-
         }
 
         public void AddNewCustomer(Customer _cust)
