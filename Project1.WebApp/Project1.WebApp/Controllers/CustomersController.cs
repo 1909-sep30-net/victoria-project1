@@ -124,16 +124,6 @@ namespace Project1.WebApp.Controllers
             return View();
         }
 
-        //public ActionResult Results(List<CustomerViewModel> viewModel)
-        //{
-        //    var results = viewModel.Select(v => new CustomerViewModel
-        //    {
-        //        Id = v.Id,
-        //        FirstName = v.FirstName,
-        //        LastName = v.LastName
-        //    });
-        //    return View(results);
-        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -154,7 +144,7 @@ namespace Project1.WebApp.Controllers
 
                 // _repository.GetCustomerByFirstName(viewModel);
 
-                return RedirectToAction("Results", viewModel);
+                return View("Results", viewModel);
             }
             catch
             {
