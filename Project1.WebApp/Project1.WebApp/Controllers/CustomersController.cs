@@ -118,5 +118,55 @@ namespace Project1.WebApp.Controllers
                 return View();
             }
         }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        //public ActionResult Results(List<CustomerViewModel> viewModel)
+        //{
+        //    var results = viewModel.Select(v => new CustomerViewModel
+        //    {
+        //        Id = v.Id,
+        //        FirstName = v.FirstName,
+        //        LastName = v.LastName
+        //    });
+        //    return View(results);
+        //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(CustomerViewModel customer)
+        {
+
+            try
+            {
+
+                List<Customer> cust = _repository.GetCustomerByFirstName(customer.FirstName);
+
+                var viewModel = cust.Select(c => new CustomerViewModel
+                {
+                    Id = c.Id,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName
+                });
+
+                // _repository.GetCustomerByFirstName(viewModel);
+
+                return RedirectToAction("Results", viewModel);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            };
+            //List<Customer> cust = _repository.GetCustomerByFirstName(search);
+
+           
+            //ViewData["SearchName"] = search;
+
+
+            //return View(viewModel);
+        }
     }
 }

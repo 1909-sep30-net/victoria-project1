@@ -12,11 +12,20 @@ namespace Project1.WebApp.Models
         [DisplayName("ID")] 
         public int Id { get; set; }
 
+        [DisplayName("First Name")]
         [Required] 
         public string FirstName { get; set; }
 
+        [DisplayName("Last Name")]
         [Required] 
         public string LastName { get; set; }
+
+
+
+
+
+
+
 
 
 

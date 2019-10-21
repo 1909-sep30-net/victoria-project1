@@ -11,7 +11,7 @@ namespace Project1.DataAccess
 
         public List<BusinessLogic.Customer> GetAllCustomers();
 
-        public Customer GetCustomerByFirstName();
+        public List<Customer> GetCustomerByFirstName(string customer);
 
 
 

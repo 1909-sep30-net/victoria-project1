@@ -29,9 +29,9 @@ namespace Project1.DataAccess.Repos
 
         }
 
-        public Customer GetCustomerByFirstName(string firstName)
+        public List<Customer> GetCustomerByFirstName(string firstname)
 
-           => context.Customers.Select(Mapper.MapCustomer).Where(c => c.FirstName == firstName).FirstOrDefault();
+           => context.Customers.Select(Mapper.MapCustomer).Where(c => c.FirstName == firstname).ToList();
 
         public List<Customer> GetAllCustomers()
         {
