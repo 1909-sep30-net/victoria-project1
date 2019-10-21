@@ -15,8 +15,9 @@ namespace Project1.DataAccess.Interfaces
         public Project1.BusinessLogic.Store GetStoreById();
 
 
+        public List<BusinessLogic.Order> GetOrdersByStoreId(int StoreId);
 
-
+        public Dictionary<Product, int> GetInventoryByStoreId(int storeId);
 
 
 

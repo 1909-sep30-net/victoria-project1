@@ -46,8 +46,8 @@
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>
-                    @Html.ActionLink("Place Order", "Place Order", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Order History", "Order History", new { /* id=item.PrimaryKey */ }) 
+                    @Html.ActionLink("Place Order", "PlaceOrder", new { id = item.Id }) |
+                    @Html.ActionLink("Order History", "CustomerOrders", "Orders", new { id = item.Id }) 
                 </td>
             </tr>
         }

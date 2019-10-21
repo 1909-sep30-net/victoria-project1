@@ -57,5 +57,29 @@ namespace Project1.DataAccess.Repos
         {
             throw new NotImplementedException();
         }
+
+        public List<Order> GetOrdersByCustId(int custId)
+        { 
+            List<Order> orders = context.Orders.Select(Mapper.MapOrder).Where(c => c.CustomerId == custId).ToList();
+            return orders;
+        }
+
+        public List<BusinessLogic.Store> GetAllStores()
+        {
+            IQueryable<Project1.DataAccess.Entities.Stores> stores = context.Stores
+                .AsNoTracking();
+
+            return stores.Select(Mapper.MapStore).ToList();
+
+
+        }
+
+
+        //public Order PlaceOrder(int id)
+        //{
+        //    //Order order = context.Orders.Add().Where(c => c.CustomerId == id)
+
+        //    //return
+        //}
     }
 }

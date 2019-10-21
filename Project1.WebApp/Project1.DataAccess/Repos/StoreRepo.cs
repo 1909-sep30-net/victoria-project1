@@ -58,5 +58,11 @@ namespace Project1.DataAccess.Repos
         {
             throw new NotImplementedException();
         }
-    }
+
+        public List<BusinessLogic.Order> GetOrdersByStoreId(int StoreId)
+         { 
+            List<Order> orders = context.Orders.Select(Mapper.MapOrder).Where(c => c.StoreId == StoreId).ToList();
+            return orders;
+        }
+}
 }

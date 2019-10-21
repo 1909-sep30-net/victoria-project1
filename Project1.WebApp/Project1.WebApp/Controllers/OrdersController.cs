@@ -4,16 +4,43 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Project1.BusinessLogic;
+using Project1.DataAccess;
+using Project1.WebApp.Models;
 
 namespace Project1.WebApp.Controllers
 {
     public class OrdersController : Controller
     {
-        // GET: Orders
-        public ActionResult Index()
+        private readonly ICustRepo _repository;
+
+        public OrdersController(ICustRepo repository)
         {
-            return View();
+            _repository = repository;
         }
+
+        // GET: Orders
+        public ActionResult CustomerOrders(int CustomerId)
+        {
+            
+            List<Order> orders = _repository.GetOrdersByCustId(CustomerId);
+
+            List<OrderViewModel> orderViewModels = orders.Select(o => new OrderViewModel
+            {
+                CustomerId = o.CustomerId,
+                OrderId = o.OrderId,
+                OrderDate = o.DateOfOrder,
+                Total = o.OrderTotal,
+                StoreId = o.StoreId
+            }).ToList();
+
+            return View("CustomerOrders", orderViewModels);
+           
+        }
+
+       
+        
+
 
         // GET: Orders/Details/5
         public ActionResult Details(int id)
@@ -44,6 +71,7 @@ namespace Project1.WebApp.Controllers
             }
         }
 
+       
         // GET: Orders/Edit/5
         public ActionResult Edit(int id)
         {

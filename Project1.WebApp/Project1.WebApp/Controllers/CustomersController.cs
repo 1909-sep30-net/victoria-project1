@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Project1.BusinessLogic;
 using Project1.DataAccess;
 using Project1.DataAccess.Entities;
+using Project1.DataAccess.Interfaces;
 using Project1.DataAccess.Repos;
 using Project1.WebApp.Models;
 
@@ -22,6 +23,7 @@ namespace Project1.WebApp.Controllers
             _repository = repository;
         }
 
+        
         // GET: Customers
         public ActionResult Index()
         {
@@ -158,5 +160,32 @@ namespace Project1.WebApp.Controllers
 
             //return View(viewModel);
         }
+
+        public ActionResult PlaceOrder(int id)
+        {
+            List<Store> stores = _repository.GetAllStores();
+
+            OrderViewModel orderViewModel = new OrderViewModel
+            {
+                CustomerId = id,
+
+                AllStores = stores.Select(s => new StoreViewModel
+
+                {
+                    StoreId = s.StoreId,
+                    City = s.City
+                }).ToList()
+
+            };
+            return View(orderViewModel);
+        }
+
+        //public ActionResult PlaceOrder(OrderViewModel orderViewModel)
+        //{
+
+        //    return View();
+        //}
+
+
     }
 }

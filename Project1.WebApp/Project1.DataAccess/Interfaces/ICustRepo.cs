@@ -13,6 +13,12 @@ namespace Project1.DataAccess
 
         public List<Customer> GetCustomerByFirstName(string customer);
 
+        public List<Order> GetOrdersByCustId(int custId);
+
+       // public Order PlaceOrder(int id);
+
+        public List<BusinessLogic.Store> GetAllStores();
+
 
 
 

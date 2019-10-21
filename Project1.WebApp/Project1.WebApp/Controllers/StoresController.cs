@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Project1.BusinessLogic;
 using Project1.DataAccess.Interfaces;
 using Project1.WebApp.Models;
 
@@ -105,6 +106,42 @@ namespace Project1.WebApp.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult StoreOrders(int StoreId)
+        {
+
+            List<Order> orders = _repository.GetOrdersByStoreId(StoreId);
+
+            List<OrderViewModel> storeViewModels = orders.Select(o => new OrderViewModel
+            {
+                CustomerId = o.CustomerId,
+                OrderId = o.OrderId,
+                OrderDate = o.DateOfOrder,
+                Total = o.OrderTotal,
+                StoreId = o.StoreId
+            }).ToList();
+
+            return View(storeViewModels);
+
+        }
+
+        public ActionResult SeeInventory(OrderViewModel orderViewModel)
+        {
+
+            Dictionary<Product, int> dic = _repository.GetInventoryByStoreId(orderViewModel.StoreId);
+
+            orderViewModel.Inventory = dic.Select(p => new ProductViewModel
+            {
+                ProductId = p.Key.ProductId,
+                ProductQuant = p.Value,
+                Price = p.Key.Price,
+                Name = p.Key.Name
+
+            }).ToList();
+
+            return View(orderViewModel);
+
         }
     }
 }
