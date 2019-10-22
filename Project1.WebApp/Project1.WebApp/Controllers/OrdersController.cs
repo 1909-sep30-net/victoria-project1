@@ -20,10 +20,10 @@ namespace Project1.WebApp.Controllers
         }
 
         // GET: Orders
-        public ActionResult CustomerOrders(int CustomerId)
+        public ActionResult CustomerOrders(int id)
         {
             
-            List<Order> orders = _repository.GetOrdersByCustId(CustomerId);
+            List<Order> orders = _repository.GetOrdersByCustId(id);
 
             List<OrderViewModel> orderViewModels = orders.Select(o => new OrderViewModel
             {

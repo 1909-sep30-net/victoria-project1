@@ -19,6 +19,13 @@ namespace Project1.DataAccess
 
         public List<BusinessLogic.Store> GetAllStores();
 
+        public Dictionary<Product, int> GetInventoryByStoreId(int storeId);
+
+        public void AddNewOrder(Order _ord);
+
+        public void UpdateInventory(BusinessLogic.Inventory invent);
+
+        public void UpdateOrderDetails(BusinessLogic.OrderDetails od);
 
 
 

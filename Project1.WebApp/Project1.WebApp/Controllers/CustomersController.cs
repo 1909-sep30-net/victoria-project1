@@ -180,11 +180,81 @@ namespace Project1.WebApp.Controllers
             return View(orderViewModel);
         }
 
-        //public ActionResult PlaceOrder(OrderViewModel orderViewModel)
-        //{
+        public ActionResult PlaceOrder2(OrderViewModel orderViewModel)
+        {
+            Dictionary<Product, int> dic2 = _repository.GetInventoryByStoreId(orderViewModel.StoreId);
 
-        //    return View();
-        //}
+            Order2ViewModel o2 = new Order2ViewModel
+            {
+                CustomerId = orderViewModel.CustomerId,
+                StoreId = orderViewModel.StoreId,
+                
+                Inventory = dic2.Select(d => new ProductViewModel
+                {
+                    Name = d.Key.Name,
+                    Price = d.Key.Price,
+                    ProductId = d.Key.ProductId,
+                    ProductQuant = 0,
+                    MaxQuant = d.Value,
+                    InventoryId = d.Key.InventoryId,
+                
+                }).ToList()
+            };
+            return View(o2);
+        }
+
+        public ActionResult PlaceOrder3(Order2ViewModel order2)
+        {
+            List<OrderDetails> orderDetails = new List<OrderDetails>();
+
+
+            Order order = new Order
+            {
+                CustomerId = order2.CustomerId,
+                StoreId = order2.StoreId,
+                DateOfOrder = DateTime.Now,
+                cart = new Dictionary<Product, int>()
+
+            };
+            foreach (var item in order2.Inventory)
+                {
+                    if (item.ProductQuant != 0)
+                    {
+                    Product product = new Product
+                    {
+                        ProductId = item.ProductId,
+                        Name = item.Name,
+                        Price = item.Price
+                    };
+
+                    //orderDetails.Add(new OrderDetails
+                    //{ 
+                    //    OrderDeatailId = 0,
+                    //    ProductId = item.ProductId,
+                    //    ProductQuant = item.ProductQuant,    
+                    //})
+
+                    BusinessLogic.Inventory inv = new BusinessLogic.Inventory
+                    {
+                        InventoryId = item.InventoryId,
+                        StoreId = order2.StoreId,
+                        ProductId = item.ProductId,
+                        Quantity = item.MaxQuant - item.ProductQuant
+                    };
+
+                    _repository.UpdateInventory(inv);
+                    
+                    order.cart[product] = item.ProductQuant;
+                     }
+
+                 }
+            _repository.AddNewOrder(order);
+
+
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
 
     }

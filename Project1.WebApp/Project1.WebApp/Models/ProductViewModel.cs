@@ -15,6 +15,11 @@ namespace Project1.WebApp.Models
 
         public int ProductQuant { get; set; }
 
+        public int MaxQuant { get; set; }
+
+        public int InventoryId { get; set; }
+
+        
 
 
     }

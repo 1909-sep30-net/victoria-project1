@@ -74,6 +74,24 @@ namespace Project1.DataAccess.Repos
 
         }
 
+        public Dictionary<Product, int> GetInventoryByStoreId(int storeId)
+        {
+            using var context = GetContext();
+            List<Entities.Inventory> getInvent = context.Inventory.Where(i => i.StoreId == storeId).ToList();
+            Dictionary<Product, int> burrito = new Dictionary<Product, int>();
+            foreach (Entities.Inventory item in getInvent)
+            {
+                burrito.Add(new Product()
+                {
+                    InventoryId = item.InventoryId,
+                    Name = context.Products.Single(p => p.ProductId == item.ProductId).Name,
+                    Price = context.Products.Single(p => p.ProductId == item.ProductId).Price, ProductId = item.ProductId },
+                    (int)item.Quantity);
+            }
+            return burrito;
+
+        }
+
 
         //public Order PlaceOrder(int id)
         //{
@@ -81,5 +99,27 @@ namespace Project1.DataAccess.Repos
 
         //    //return
         //}
+
+        public void AddNewOrder(Order _ord)
+        {
+            Orders Ord = Mapper.MapDbOrders(_ord);
+            context.Add(Ord);
+            context.SaveChanges();
+        }
+
+        public void UpdateInventory(BusinessLogic.Inventory invent)
+        {
+            Entities.Inventory Invent = Mapper.MapDbInventory(invent);
+            context.Update(Invent);
+            context.SaveChanges();
+
+        }
+
+        public void UpdateOrderDetails(BusinessLogic.OrderDetails od)
+        {
+            Entities.OrderDetail Od = Mapper.MapDbOrderDetail(od);
+            context.Update(Od);
+            context.SaveChanges();
+        }
     }
 }
