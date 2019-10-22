@@ -143,5 +143,21 @@ namespace Project1.WebApp.Controllers
             return View(orderViewModel);
 
         }
+
+        public ActionResult InventoryDetails(int id)
+        {
+            Dictionary<Product, int> dic3 = _repository.GetInventoryByStoreId(id);
+            
+            var viewModels = dic3.Select(p => new ProductViewModel
+            {
+                ProductId = p.Key.ProductId,
+                ProductQuant = p.Value,
+                Price = p.Key.Price,
+                Name = p.Key.Name
+
+            }).ToList();
+
+            return View(viewModels);
+        }
     }
 }
