@@ -136,6 +136,8 @@ namespace Project1.DataAccess
 
                 CustomerId = orders.CustomerId,
 
+                ProductOrdered = orders.OrderDetail.Select(MapOrderDetail).ToList()
+
                
 
                 //cart = MapCart()? map orderdetailID?
@@ -164,6 +166,7 @@ namespace Project1.DataAccess
 
                 CustomerId = order.CustomerId,
 
+                OrderDetail = order.ProductOrdered.Select(MapDbOrderDetail).ToList()
 
 
             };

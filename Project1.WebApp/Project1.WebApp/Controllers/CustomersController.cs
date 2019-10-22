@@ -205,7 +205,7 @@ namespace Project1.WebApp.Controllers
 
         public ActionResult PlaceOrder3(Order2ViewModel order2)
         {
-            List<OrderDetails> orderDetails = new List<OrderDetails>();
+            
 
 
             Order order = new Order
@@ -227,12 +227,14 @@ namespace Project1.WebApp.Controllers
                         Price = item.Price
                     };
 
-                    //orderDetails.Add(new OrderDetails
-                    //{ 
-                    //    OrderDeatailId = 0,
-                    //    ProductId = item.ProductId,
-                    //    ProductQuant = item.ProductQuant,    
-                    //})
+                    OrderDetails taco = new OrderDetails
+                    {
+                        OrderDeatailId = 0,
+                        ProductId = item.ProductId,
+                        ProductQuant = item.ProductQuant,
+                    };
+
+                    order.ProductOrdered.Add(taco);
 
                     BusinessLogic.Inventory inv = new BusinessLogic.Inventory
                     {

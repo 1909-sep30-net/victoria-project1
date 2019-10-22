@@ -108,10 +108,10 @@ namespace Project1.WebApp.Controllers
             }
         }
 
-        public ActionResult StoreOrders(int StoreId)
+        public ActionResult StoreOrders(int id)
         {
 
-            List<Order> orders = _repository.GetOrdersByStoreId(StoreId);
+            List<Order> orders = _repository.GetOrdersByStoreId(id);
 
             List<OrderViewModel> storeViewModels = orders.Select(o => new OrderViewModel
             {

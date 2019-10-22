@@ -40,5 +40,7 @@ namespace Project1.BusinessLogic
             }
         }
 
+        public List<OrderDetails> ProductOrdered = new List<OrderDetails>();
+
     }
 }
