@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace Project1.WebApp.Models
         public int ProductQuant { get; set; }
 
         [DisplayName("Quantity")]
+        [Required]
         public int MaxQuant { get; set; }
 
         [DisplayName("Inventory ID")]
