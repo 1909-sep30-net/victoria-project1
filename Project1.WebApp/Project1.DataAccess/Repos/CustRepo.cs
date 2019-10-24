@@ -14,10 +14,10 @@ namespace Project1.DataAccess.Repos
 
         public static ClothesEncountersContext GetContext()
         {
-            string connectionString = SecretConfiguration.ConnectionString;
+           
 
             DbContextOptions<ClothesEncountersContext> options = new DbContextOptionsBuilder<ClothesEncountersContext>()
-                .UseSqlServer(connectionString)
+                .UseSqlServer("CeDb")
                 .Options;
 
             return new ClothesEncountersContext(options);
