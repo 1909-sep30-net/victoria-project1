@@ -19,15 +19,17 @@
     <a asp-action="Search">Search Customers</a>
 </p>
 <table class="table">
+    <caption>Current Customer List</caption>
     <thead>
         <tr>
-            <th>
+            
+            <th id="Id">CustomerId>
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)  
+            <th id="FirstName">FirstName>
+                @Html.DisplayNameFor(model => model.FirstName)
             </th>
-            <th>
+            <th id="LastName">LastName>
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
         </tr>
@@ -47,7 +49,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Place Order", "PlaceOrder", new { id = item.Id }) |
-                    @Html.ActionLink("Order History", "CustomerOrders", "Orders", new { id = item.Id }) 
+                    @Html.ActionLink("Order History", "CustomerOrders", "Orders", new { id = item.Id })
                 </td>
             </tr>
         }
