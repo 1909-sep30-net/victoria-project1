@@ -20,7 +20,7 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'vdelaguardia'
     projectName: 'Project1'
-    extraProperties: 
+    extraProperties: |
         sonar.exclusions=**/lib/**
 
 - script: dotnet build --configuration $(buildConfiguration)
