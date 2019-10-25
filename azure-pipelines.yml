@@ -17,3 +17,32 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
   workingDirectory: Project1.WebApp/Project1.WebApp
   
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: 'test'
+    projects: './Project1.WebApp'
+    arguments: --configuration $(buildConfiguration) --collect "XPlat Code Coverage"
+
+- task: PublishCodeCoverageResults@1
+  displayName: Publish code coverage
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish + zip
+  inputs:
+    command: 'publish'
+    projects: Project1.WebApp/Project1.WebApp
+    arguments: --configuration $(buildConfiguration)
+    zipAfterPublish: true
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(1aea89d4-388d-4d50-938f-9c95f509c96d)'
+    appType: 'webApp'
+    WebAppName: 'delaguardiawebapp'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
