@@ -51,8 +51,8 @@ steps:
   displayName: dotnet publish + zip
   inputs:
     command: 'publish'
-    projects: Project1.WebApp/Project1.WebApp
     arguments: --configuration $(buildConfiguration)
+    publishWebProjects: true
     zipAfterPublish: true
 
 - task: AzureRmWebAppDeployment@4
